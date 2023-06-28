@@ -1,0 +1,26 @@
+.footer {
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    background-color: #6278F7;
+}
+
+.footer .redes-sociais {
+    display: flex;
+    align-items: center;
+}
+
+.footer .redes-sociais img {
+    padding: 15%;
+}
+
+.footer .logo-organo {
+    display: flex;
+    align-items: center;
+}
+
+.footer .texto {
+    display: flex;
+    align-items: center;
+    color: white;
+}
