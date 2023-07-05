@@ -1,5 +1,5 @@
 import "./Formulario.css";
-import CampoTexto from "../CampoTexto";
+import Campo from "../Campo";
 import ListaSuspensa from "../ListaSuspensa";
 import Botao from "../Botao";
 import { useState } from "react";
@@ -10,9 +10,9 @@ const Formulario = (props) => {
   const [cargo, setCargo] = useState("");
   const [imagem, setImagem] = useState("");
   const [time, setTime] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailDeConfirmacao, setEmailDeConfirmacao] = useState("");
-  var emailMessage = ""
+  const [nomeTime, setNomeTime] = useState("");
+  const [corTime, setCorTime] = useState("");
+  
 
   const aoSalvar = (evento) => {
     evento.preventDefault();
@@ -20,70 +20,33 @@ const Formulario = (props) => {
       nome, 
       cargo, 
       imagem,
-      time, 
-      email
+      time
     })
     setNome('')
     setCargo('')
     setImagem('')
     setTime('')
-    setEmail('')
-    setEmailDeConfirmacao('')
   };
-
-  const validaEmail = (valor) => {
-    if(!valor.includes("@")) {
-      emailMessage = "Email inválido"
-      console.log(emailMessage)
-    } else {
-      emailMessage = "Email válido"
-      console.log(emailMessage)
-    }
-    setEmail(valor)
-  };
-
-  const confirmaEmail = (valor) => {
-    if(valor === email) {
-      console.log("Email igual")
-    } else {
-      console.log("Email diferente")
-    }
-    setEmailDeConfirmacao(valor)
-  }
 
   return (
     <section className="formulario">
       <form onSubmit={aoSalvar}>
         <h2>Preencha os dados para criar o card do colaborador</h2>
-        <CampoTexto
+        <Campo
           obrigatorio={true}
           label="Nome"
           placeholder="Digite seu nome"
           valor={nome}
           aoAlterado={(valor) => setNome(valor)}
         />
-        {/* <CampoTexto
-          obrigatorio={true}
-          label="Email"
-          placeholder="Digite seu email"
-          valor={email}
-          aoAlterado={validaEmail}
-        />
-        <CampoTexto
-          obrigatorio={true}
-          label="Digite novamente seu email"
-          placeholder="Digite novamente seu email"
-          valor={emailDeConfirmacao}
-          aoAlterado={confirmaEmail}
-        /> */}
-        <CampoTexto
+        <Campo
           obrigatorio={true}
           label="Cargo"
           placeholder="Digite seu cargo"
           valor={cargo}
           aoAlterado={(valor) => setCargo(valor)}
         />
-        <CampoTexto
+        <Campo
           label="Imagem"
           placeholder="Digite o endereço da imagem"
           valor={imagem}
@@ -97,6 +60,29 @@ const Formulario = (props) => {
         aoAlterado={(valor => setTime(valor))}
         />
         <Botao texto="Criar card" />
+      </form>
+
+      <form onSubmit={(evento) => {
+        evento.preventDefault()
+        props.cadastrarTime({nome: nomeTime, cor: corTime})
+      }}>
+        <h2>Preencha os dados para criar um novo time</h2>
+        <Campo
+          obrigatorio
+          label="Nome"
+          placeholder="Digite o nome do time"
+          valor={nomeTime}
+          aoAlterado={(valor) => setNomeTime(valor)}
+        />
+        <Campo
+          obrigatorio
+          type='color'
+          label="Cor"
+          placeholder="Digite a cor do time"
+          valor={corTime}
+          aoAlterado={(valor) => setCorTime(valor)}
+        />
+        <Botao texto="Criar time" />
       </form>
     </section>
   );
