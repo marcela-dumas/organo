@@ -35,3 +35,4 @@ const Time = ({aoFavoritarColaborador, aoDeletar, mudarCor, ...props}) => {
 };
 
 export default Time;
+
