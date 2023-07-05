@@ -44,7 +44,15 @@ function App() {
     },
   ]);
 
-  const [colaboradores, setColaboradores] = useState([]);
+  const [colaboradores, setColaboradores] = useState([
+    {
+      id: uuidv4(),
+      nome: "Marcela Dumas",
+      cargo: "Dev jr",
+      imagem: "http://github.com/marcela-dumas.png",
+      time: "Programação"
+    },
+  ]);
 
   const aoNovoColaboradorAdicionado = (colaborador) => {
     colaborador.id = uuidv4();
@@ -76,10 +84,10 @@ function App() {
   const favoritarColaborador = (id) => {
     setColaboradores(
       colaboradores.map((colaborador) => {
-        if(colaborador.id === id) {
-          colaborador.favorito = !colaborador.favorito
+        if (colaborador.id === id) {
+          colaborador.favorito = !colaborador.favorito;
         }
-        return colaborador
+        return colaborador;
       })
     );
   };
